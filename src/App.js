@@ -6,28 +6,32 @@ import List from "./container/list/list";
 import data from "./data/data.json";
 
 function App() {
-  const [ListData, setListData] = useState();
-  const [Lists, setList] = useState();
+  const [ListData, setListData] = useState(data);
+  const [ListView, setListView] = useState();
+  const [ListSort, setListSort] = useState();
   const [isSort, setisSort] = useState(false);
 
   const sort = (Quality) => {
-    let list;
-    list = _.sortBy(ListData ? ListData : Lists, Quality);
-    setisSort(!sort);
-    // list = ListData ? ListData : Lists.sort((a, b) => a.Quality - b.Quality);
-    setListData(list);
+    let list = ListData.sort(function (a, b) {
+      var nameA = a[Quality].toUpperCase();
+      var nameB = b[Quality].toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      return 0;
+    });
+    setListSort(list);
   };
 
   return (
     <div className="App">
-      <FilterBox Data={Lists} setData={setListData} />
-      <List
-        Data={ListData ? ListData : Lists}
-        sort={sort}
-        isSort={isSort}
-        setListData={setListData}
-      />
-      <Pagination total={data} setData={setList} setListData={setListData} />
+      <FilterBox Data={data} setData={setListData} />
+      <List Data={ListView} sort={sort} isSort={isSort} />
+      <Pagination total={ListData} setListView={setListView} />
     </div>
   );
 }

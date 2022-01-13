@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import "../../assets/style/pagin.scss";
-const Pagination = ({ total, setData, setListData }) => {
+const Pagination = ({ total, setListView, setListData }) => {
   const [CurrentPage, setCurrentPage] = useState(0);
-  const Total = Math.ceil(total.length / 10 - 1);
+  let Total;
+  if (total) {
+    Total = Math.ceil(total.length / 10 - 1);
+  }
+  // console.log(total);
 
   useEffect(() => {
     getData();
-  }, [CurrentPage]);
+  }, [CurrentPage, total]);
 
   const getData = () => {
+    // window.history.pushState("list", "", `/?page=${CurrentPage}`);
     let realData = total.slice(CurrentPage * 10, CurrentPage * 10 + 10);
-    setListData();
-    setData(realData);
+    setListView(realData);
   };
 
   const paginList = [];
