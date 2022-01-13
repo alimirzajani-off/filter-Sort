@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "./component/pagination/pagination";
 import FilterBox from "./container/filterBox/filterBox";
 import List from "./container/list/list";
@@ -13,15 +13,20 @@ function App() {
   const sort = (Quality) => {
     let list;
     list = _.sortBy(ListData ? ListData : Lists, Quality);
+    setisSort(!sort);
     // list = ListData ? ListData : Lists.sort((a, b) => a.Quality - b.Quality);
-    // console.log(list);
     setListData(list);
   };
 
   return (
     <div className="App">
       <FilterBox Data={Lists} setData={setListData} />
-      <List Data={ListData ? ListData : Lists} sort={sort} isSort={isSort} />
+      <List
+        Data={ListData ? ListData : Lists}
+        sort={sort}
+        isSort={isSort}
+        setListData={setListData}
+      />
       <Pagination total={data} setData={setList} setListData={setListData} />
     </div>
   );

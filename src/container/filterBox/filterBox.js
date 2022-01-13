@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "../../component/filter/filter";
 import "../../assets/style/filter.scss";
 
 const FilterBox = ({ Data, setData }) => {
-  const [fName, setfName] = useState("");
-  const [fDate, setfDate] = useState("");
-  const [fTitle, setfTitle] = useState("");
-  const [fField, setfField] = useState("");
+  const queryParams = new URLSearchParams(window.location.search);
+  const [fName, setfName] = useState(queryParams.get("name"));
+  const [fDate, setfDate] = useState(queryParams.get("date"));
+  const [fTitle, setfTitle] = useState(queryParams.get("title"));
+  const [fField, setfField] = useState(queryParams.get("field"));
+
+  window.history.pushState(
+    "list",
+    "",
+    `/?name=${fName ? fName : ""}&date=${fDate ? fDate : ""}&title=${
+      fTitle ? fTitle : ""
+    }&field=${fField ? fField : ""}`
+  );
   const filterData = () => {
     let list;
     list = Data.filter((item) => {
@@ -19,19 +28,24 @@ const FilterBox = ({ Data, setData }) => {
     });
     setData(list);
   };
+
+  useEffect(() => {
+    if (Data) {
+      filterData();
+    }
+  }, [Data]);
+
   return (
     <div className="filterBox">
       <div className="fbBtn">
-        <button type="submit" onClick={filterData} className="filterBtn">
+        <button type="submit" onClick={filterData} className=" filterBtn">
           اعمال فیلتر
         </button>
       </div>
-      {/* <div className="fbInput"> */}
-      <Filter title={"فیلد"} set={setfField} />
-      <Filter title={"نام آگهی"} set={setfTitle} />
-      <Filter title={"تاریخ"} type="date" set={setfDate} />
-      <Filter title={"نام تغییر دهنده"} set={setfName} />
-      {/* </div> */}
+      <Filter title={"فیلد"} set={setfField} valu={fField} />
+      <Filter title={"نام آگهی"} set={setfTitle} valu={fTitle} />
+      <Filter title={"تاریخ"} type="date" set={setfDate} valu={fDate} />
+      <Filter title={"نام تغییر دهنده"} set={setfName} valu={fName} />
     </div>
   );
 };

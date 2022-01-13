@@ -4,15 +4,6 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap-reverse;
-    // display: flex;
-    // align-items: flex-end;
-    // flex-direction: column;
-    // flex-wrap: wrap-reverse;
-    // .fbInput{
-    //     display: flex;
-    // justify-content: space-around;
-    // width: 100%;
-    // }
 }
 .filterBtn{
     font-size: 16px;
@@ -23,7 +14,6 @@
     width: 8rem;
     height: 2rem;
 }
-
 .fbItem{
     display: flex;
     flex-direction: column;

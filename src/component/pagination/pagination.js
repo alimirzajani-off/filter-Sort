@@ -35,6 +35,7 @@ const Pagination = ({ total, setData, setListData }) => {
     return paginList.map((i) => {
       return (
         <p
+          key={i}
           className={`paginItem ${CurrentPage == i - 1 ? `currentPage` : ""}`}
           onClick={() => setCurrentPage(i - 1)}
         >
