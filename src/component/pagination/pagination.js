@@ -6,7 +6,6 @@ const Pagination = ({ total, setListView, setListData }) => {
   if (total) {
     Total = Math.ceil(total.length / 10 - 1);
   }
-  // console.log(total);
 
   useEffect(() => {
     getData();

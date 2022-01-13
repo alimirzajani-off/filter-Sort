@@ -11,7 +11,7 @@ const FilterBox = ({ Data, setData }) => {
   const [fField, setfField] = useState(queryParams.get("field"));
   const [optionval, setoption] = useState(queryParams.get("sortval"));
   const [ADC, setADC] = useState(queryParams.get("ADC"));
-  console.log(optionval);
+
   window.history.pushState(
     "list",
     "",
