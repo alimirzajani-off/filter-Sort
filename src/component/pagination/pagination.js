@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import "../../assets/style/pagin.scss";
-const Pagination = ({ total, Data, setData }) => {
+const Pagination = ({ total, setData, setListData }) => {
   const [CurrentPage, setCurrentPage] = useState(0);
-  const Total = Math.ceil(total / 10 - 1);
+  const Total = Math.ceil(total.length / 10 - 1);
 
   useEffect(() => {
     getData();
   }, [CurrentPage]);
 
   const getData = () => {
-    let realData = Data.slice(CurrentPage * 10, CurrentPage * 10 + 10);
+    let realData = total.slice(CurrentPage * 10, CurrentPage * 10 + 10);
+    setListData();
     setData(realData);
   };
 

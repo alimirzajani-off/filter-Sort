@@ -17,12 +17,12 @@ function App() {
     // console.log(list);
     setListData(list);
   };
-  const total = data.length;
+
   return (
     <div className="App">
       <FilterBox Data={Lists} setData={setListData} />
       <List Data={ListData ? ListData : Lists} sort={sort} isSort={isSort} />
-      <Pagination total={total} Data={data} setData={setList} />
+      <Pagination total={data} setData={setList} setListData={setListData} />
     </div>
   );
 }
