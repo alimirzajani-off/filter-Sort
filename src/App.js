@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import _ from "lodash";
+import { useState } from "react";
+import Pagination from "./component/pagination/pagination";
+import FilterBox from "./container/filterBox/filterBox";
+import List from "./container/list/list";
+import data from "./data/data.json";
 
 function App() {
+  const [ListData, setListData] = useState();
+  const [Lists, setList] = useState();
+  const [isSort, setisSort] = useState(false);
+
+  const sort = (Quality) => {
+    let list;
+    list = _.sortBy(ListData ? ListData : Lists, Quality);
+    // list = ListData ? ListData : Lists.sort((a, b) => a.Quality - b.Quality);
+    // console.log(list);
+    setListData(list);
+  };
+  const total = data.length;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FilterBox Data={Lists} setData={setListData} />
+      <List Data={ListData ? ListData : Lists} sort={sort} isSort={isSort} />
+      <Pagination total={total} Data={data} setData={setList} />
     </div>
   );
 }

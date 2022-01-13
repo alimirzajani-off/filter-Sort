@@ -1,0 +1,17 @@
+.pagination{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.paginItem,.nextBtn,.prevBtn{
+    padding: 0 1rem;
+    cursor: pointer;
+}
+.currentPage{
+    color: white;
+    background: cornflowerblue;
+    border-radius: 6px;
+    height: 1.5rem;
+}
