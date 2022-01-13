@@ -10,7 +10,9 @@ const FilterBox = ({ Data, setData }) => {
   const [fTitle, setfTitle] = useState(queryParams.get("title"));
   const [fField, setfField] = useState(queryParams.get("field"));
   const [optionval, setoption] = useState(queryParams.get("sortval"));
-  const [ADC, setADC] = useState(queryParams.get("ADC"));
+  const [ADC, setADC] = useState(
+    queryParams.get("sort") ? queryParams.get("sort") : "asc"
+  );
 
   window.history.pushState(
     "list",
@@ -21,7 +23,7 @@ const FilterBox = ({ Data, setData }) => {
       optionval ? optionval : ""
     }`
   );
-
+  console.log(ADC);
   const filterData = () => {
     let list;
     list = Data.filter((item) => {
@@ -82,7 +84,7 @@ const FilterBox = ({ Data, setData }) => {
       <Filter title={"نام آگهی"} set={setfTitle} valu={fTitle} />
       <Filter title={"تاریخ"} type="date" set={setfDate} valu={fDate} />
       <Filter title={"نام تغییر دهنده"} set={setfName} valu={fName} />
-      <Select set={setoption} title={"مرتب سازی"}>
+      <Select set={setoption} title={"مرتب سازی"} firstval={optionval}>
         <option value="">بر اساس فیلد</option>
         <option value="name">نام تغییر دهنده</option>
         <option value="date">تاریخ</option>
@@ -91,7 +93,7 @@ const FilterBox = ({ Data, setData }) => {
         <option value="old_value">مقدار قدیمی</option>
         <option value="new_value">مقدار جدید</option>
       </Select>
-      <Select set={setADC} title={"مرتب سازی"}>
+      <Select set={setADC} title={"مرتب سازی"} firstval={ADC}>
         <option value="asc">صعودی</option>
         <option value="desc">نزولی</option>
       </Select>

@@ -12,7 +12,6 @@ const Pagination = ({ total, setListView, setListData }) => {
   }, [CurrentPage, total]);
 
   const getData = () => {
-    // window.history.pushState("list", "", `/?page=${CurrentPage}`);
     let realData = total.slice(CurrentPage * 10, CurrentPage * 10 + 10);
     setListView(realData);
   };
